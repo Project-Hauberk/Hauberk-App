@@ -10,6 +10,24 @@ abstract class Storable {
   JSON toJson();
 }
 
+final CollectionReference<User> usersColl = firestore
+    .collection('users')
+    .withConverter<User>(
+      fromFirestore: (snapshot, _) =>
+          User.fromJson(snapshot.data() ?? (throw Exception('Null user map'))),
+      toFirestore: (obj, _) => obj.toJson(),
+    );
+
+final CollectionReference<Account> accountsColl = firestore
+    .collection('users')
+    .doc(userId)
+    .collection('accounts')
+    .withConverter<Account>(
+      fromFirestore: (snapshot, _) => Account.fromJson(
+          snapshot.data() ?? (throw Exception('Null account map'))),
+      toFirestore: (obj, _) => obj.toJson(),
+    );
+
 final CollectionReference<Transaction> txnsColl = firestore
     .collection('users')
     .doc(userId)
