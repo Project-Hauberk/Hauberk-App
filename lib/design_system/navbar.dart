@@ -1,6 +1,14 @@
 part of 'package:hauberk/main.dart';
 
-BottomNavigationBar mobileNavBar(BuildContext context) => BottomNavigationBar(
+BottomNavigationBar mobileNavBar(BuildContext context, [int index = 0]) =>
+    BottomNavigationBar(
+      backgroundColor: HauberkColors.black,
+      unselectedItemColor: HauberkColors.green.withOpacity(0.3),
+      selectedItemColor: HauberkColors.green.withOpacity(0.7),
+      showUnselectedLabels: true,
+      currentIndex: index,
+      type: BottomNavigationBarType.fixed,
+      elevation: 10,
       items: const [
         BottomNavigationBarItem(
           label: 'Dashboard',
