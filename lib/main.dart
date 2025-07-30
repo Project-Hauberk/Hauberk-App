@@ -22,9 +22,12 @@ part './views/dashboard.dart';
 part './views/budgeting.dart';
 part './views/profile.dart';
 
+part './forms/add_transaction_form.dart';
+
 part './objects/transaction.dart';
 part './objects/user.dart';
 part './objects/account.dart';
+part './objects/tag.dart';
 
 part './utils/utils.dart';
 

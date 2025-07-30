@@ -49,9 +49,19 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
 Account _$AccountFromJson(Map<String, dynamic> json) => Account(
       name: json['name'] as String,
       balance: (json['balance'] as num).toDouble(),
+      ownerId: json['ownerId'] as String,
     );
 
 Map<String, dynamic> _$AccountToJson(Account instance) => <String, dynamic>{
       'name': instance.name,
       'balance': instance.balance,
+      'ownerId': instance.ownerId,
+    };
+
+Tag _$TagFromJson(Map<String, dynamic> json) => Tag(
+      label: json['label'] as String,
+    );
+
+Map<String, dynamic> _$TagToJson(Tag instance) => <String, dynamic>{
+      'label': instance.label,
     };

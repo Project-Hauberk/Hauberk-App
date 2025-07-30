@@ -28,6 +28,16 @@ final CollectionReference<Account> accountsColl = firestore
       toFirestore: (obj, _) => obj.toJson(),
     );
 
+final CollectionReference<Tag> tagsColl = firestore
+    .collection('users')
+    .doc(userId)
+    .collection('tags')
+    .withConverter<Tag>(
+      fromFirestore: (snapshot, _) =>
+          Tag.fromJson(snapshot.data() ?? (throw Exception('Null tag map'))),
+      toFirestore: (obj, _) => obj.toJson(),
+    );
+
 final CollectionReference<Transaction> txnsColl = firestore
     .collection('users')
     .doc(userId)
