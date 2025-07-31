@@ -21,6 +21,9 @@ class AddTransactionFormState extends State<AddTransactionForm> {
   final TextEditingController toAccController = TextEditingController();
   (String, String) accOwners = ('', '');
 
+  String fromAccId = '';
+  String toAccId = '';
+
   void updateTxnType() {
     final String txnType;
     if (accOwners.$1 == userId) {
@@ -144,10 +147,12 @@ class AddTransactionFormState extends State<AddTransactionForm> {
                         () => Row(
                           children: [
                             DropdownMenu(
+                              controller: fromAccController,
                               label: const Text('From'),
                               onSelected: (val) => setState(() {
                                 accOwners =
                                     (val?.data().ownerId ?? '', accOwners.$2);
+                                fromAccId = val?.id ?? '';
                                 updateTxnType();
                               }),
                               inputDecorationTheme: InputDecorationTheme(
@@ -185,9 +190,12 @@ class AddTransactionFormState extends State<AddTransactionForm> {
                             const SizedBox(width: 16),
                             DropdownMenu(
                               label: const Text('To'),
+                              controller: toAccController,
                               onSelected: (val) => setState(() {
                                 accOwners =
                                     (accOwners.$1, val?.data().ownerId ?? '');
+                                toAccId = val?.id ?? '';
+
                                 updateTxnType();
                               }),
                               inputDecorationTheme: InputDecorationTheme(
@@ -298,26 +306,26 @@ class AddTransactionFormState extends State<AddTransactionForm> {
                         ),
                       ),
                     ),
-                    const Spacer(),
+                    const SizedBox(height: 60),
                     SizedBox(
                       width: 300,
                       height: 60,
                       child: TextButton(
                         onPressed: () async {
-                          await firestore
-                              .collection('users')
-                              .doc(userId)
-                              .collection('transactions')
-                              .add(
-                            {
-                              'description': descriptionController.text,
-                              'tags': tagsController.text,
-                              'amount': double.parse(amountController.text),
-                              'fromAccount': fromAccController.text,
-                              'toAccount': toAccController.text,
-                              'txnType': txnTypeController.text,
-                              'timestamp': timestampController.text,
-                            },
+                          await txnsColl.add(
+                            Transaction(
+                              description: descriptionController.text,
+                              tags: [tagsController.text],
+                              amount: double.parse(amountController.text),
+                              fromAccountId: fromAccId,
+                              toAccountId: toAccId,
+                              txnType: $enumDecode(
+                                _$TxnTypeEnumMap,
+                                txnTypeController.text.toLowerCase(),
+                              ),
+                              timestamp:
+                                  DateTime.parse(timestampController.text),
+                            ),
                           );
                         },
                         child: Container(

@@ -14,8 +14,8 @@ class Transaction {
   final String description;
   final DateTime timestamp;
   final double amount;
-  final Account fromAccount;
-  final Account toAccount;
+  final String fromAccountId;
+  final String toAccountId;
   final TxnType txnType;
   final List<String> tags;
 
@@ -23,8 +23,8 @@ class Transaction {
     required this.description,
     required this.tags,
     required this.amount,
-    required this.fromAccount,
-    required this.toAccount,
+    required this.fromAccountId,
+    required this.toAccountId,
     required this.txnType,
     required this.timestamp,
   });

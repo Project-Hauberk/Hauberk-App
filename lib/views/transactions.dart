@@ -37,10 +37,10 @@ class TransactionsViewState extends State<TransactionsView> {
                           child: Text(txn.amount.toStringAsFixed(2)),
                         ),
                         TableCell(
-                          child: Text(txn.fromAccount.name),
+                          child: Text(txn.fromAccountId),
                         ),
                         TableCell(
-                          child: Text(txn.toAccount.name),
+                          child: Text(txn.toAccountId),
                         ),
                         TableCell(
                           child: Text(txn.txnType.name),
