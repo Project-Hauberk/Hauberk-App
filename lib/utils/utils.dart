@@ -24,7 +24,9 @@ extension SnapshotUtils on AsyncSnapshot {
           print(stackTrace);
           return Material(
             child: Center(
-              child: SizedBox.expand(
+              child: SizedBox(
+                width: 100,
+                height: 100,
                 child: Center(
                   child: Text(
                       'Exception occurred. See logs of exception #$id for details.'),

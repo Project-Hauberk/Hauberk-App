@@ -9,6 +9,8 @@ class TransactionsView extends StatefulWidget {
 
 class TransactionsViewState extends State<TransactionsView> {
   final loadTableFuture = txnsColl.limit(20).get();
+  final Map<String, Account> accountsMap = {};
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,62 +19,180 @@ class TransactionsViewState extends State<TransactionsView> {
       body: Stack(
         children: [
           Positioned.fill(
-            child: FutureBuilder(
-              future: loadTableFuture,
-              builder: (ctx, snapshot) => snapshot.standardHandler(() {
-                final List<TableRow> rows = [];
-                for (QueryDocumentSnapshot<Transaction> doc
-                    in snapshot.data?.docs ?? const []) {
-                  final Transaction txn = doc.data();
-                  rows.add(
-                    TableRow(
-                      children: [
-                        TableCell(
-                          child: Text(txn.description),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Transactions',
+                  style: viewTitle.apply(),
+                ),
+                Text(
+                  'History',
+                  style: heading1.apply(),
+                ),
+                const SizedBox(height: 20),
+                FutureBuilder(
+                  future: loadTableFuture,
+                  builder: (ctx, snapshot) => snapshot.standardHandler(() {
+                    final List<TableRow> rows = [
+                      TableRow(
+                        decoration: BoxDecoration(
+                          color: HauberkColors.green.withOpacity(0.4),
                         ),
-                        TableCell(
-                          child: Text(txn.timestamp.toIso8601String()),
-                        ),
-                        TableCell(
-                          child: Text(txn.amount.toStringAsFixed(2)),
-                        ),
-                        TableCell(
-                          child: Text(txn.fromAccountId),
-                        ),
-                        TableCell(
-                          child: Text(txn.toAccountId),
-                        ),
-                        TableCell(
-                          child: Text(txn.txnType.name),
-                        ),
-                        TableCell(
-                          child: Text(txn.tags.join(', ')),
-                        ),
-                      ],
-                    ),
-                  );
-                }
-                return snapshot.data?.size != 0
-                    ? Table(
-                        border: TableBorder.all(color: Colors.red),
-                        columnWidths: const {
-                          0: FractionColumnWidth(0.3), // Description
-                          1: FractionColumnWidth(0.1), // Timestamp
-                          2: FractionColumnWidth(0.05), // Amount
-                          3: FractionColumnWidth(0.1), // FromAcc
-                          4: FractionColumnWidth(0.1), // ToAcc
-                          5: FractionColumnWidth(0.1), // TxnType
-                          6: FractionColumnWidth(0.25), // Tags
-                        },
-                        children: rows,
-                      )
-                    : Center(
-                        child: Text(
-                          'No data.',
-                          style: body1.apply(),
+                        children: [
+                          TableCell(
+                            child: Text(
+                              'Description',
+                              style: body2.apply(),
+                            ),
+                          ),
+                          TableCell(
+                            child: Text(
+                              'Amount',
+                              style: body2.apply(),
+                            ),
+                          ),
+                          TableCell(
+                            child: Text(
+                              'From',
+                              style: body2.apply(),
+                            ),
+                          ),
+                          TableCell(
+                            child: Text(
+                              'To',
+                              style: body2.apply(),
+                            ),
+                          ),
+                          TableCell(
+                            child: Text(
+                              'Type',
+                              style: body2.apply(),
+                            ),
+                          ),
+                          TableCell(
+                            child: Text(
+                              'Tags',
+                              style: body2.apply(),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ];
+                    for (QueryDocumentSnapshot<Transaction> doc
+                        in snapshot.data?.docs ?? const []) {
+                      final Transaction txn = doc.data();
+                      rows.add(
+                        TableRow(
+                          decoration: BoxDecoration(
+                            color: HauberkColors.green.withOpacity(0.1),
+                          ),
+                          children: [
+                            TableCell(
+                              child: Text(
+                                txn.description,
+                                style: body2.apply(),
+                              ),
+                            ),
+                            TableCell(
+                              child: Text(
+                                txn.amount.toStringAsFixed(2),
+                                style: body2.apply(),
+                              ),
+                            ),
+                            TableCell(
+                              child: txn.fromAccountId == '' ||
+                                      accountsMap.containsKey(txn.fromAccountId)
+                                  ? Text(
+                                      accountsMap[txn.fromAccountId]?.name ??
+                                          '--',
+                                      style: body2.apply(),
+                                    )
+                                  : FutureBuilder(
+                                      future: (() async {
+                                        final data = await accountsColl
+                                            .doc(txn.fromAccountId)
+                                            .get();
+                                        accountsMap[txn.fromAccountId] =
+                                            data.data()!;
+                                        return data;
+                                      })(),
+                                      builder: (_, snapshot) =>
+                                          snapshot.standardHandler(
+                                        () => Text(
+                                          snapshot.data?.data()?.name ??
+                                              'ERROR',
+                                          style: body2.apply(),
+                                        ),
+                                      ),
+                                    ),
+                            ),
+                            TableCell(
+                              child: txn.toAccountId == '' ||
+                                      accountsMap.containsKey(txn.toAccountId)
+                                  ? Text(
+                                      accountsMap[txn.toAccountId]?.name ??
+                                          '--',
+                                      style: body2.apply(),
+                                    )
+                                  : FutureBuilder(
+                                      future: (() async {
+                                        final data = await accountsColl
+                                            .doc(txn.toAccountId)
+                                            .get();
+                                        accountsMap[txn.toAccountId] =
+                                            data.data()!;
+                                        return data;
+                                      })(),
+                                      builder: (_, snapshot) =>
+                                          snapshot.standardHandler(
+                                        () => Text(
+                                          snapshot.data?.data()?.name ??
+                                              'ERROR',
+                                          style: body2.apply(),
+                                        ),
+                                      ),
+                                    ),
+                            ),
+                            TableCell(
+                              child: Text(
+                                txn.txnType.name,
+                                style: body2.apply(),
+                              ),
+                            ),
+                            TableCell(
+                              child: Text(
+                                txn.tags.join(', '),
+                                style: body2.apply(),
+                              ),
+                            ),
+                          ],
                         ),
                       );
-              }),
+                    }
+                    return snapshot.data?.size != 0
+                        ? Table(
+                            border: TableBorder.all(
+                                color: HauberkColors.green.withOpacity(0.7)),
+                            columnWidths: const {
+                              0: FractionColumnWidth(0.25), // Description
+                              2: FractionColumnWidth(0.25), // Amount
+                              3: FractionColumnWidth(0.1), // FromAcc
+                              4: FractionColumnWidth(0.1), // ToAcc
+                              5: FractionColumnWidth(0.1), // TxnType
+                              6: FractionColumnWidth(0.15), // Tags
+                            },
+                            children: rows,
+                          )
+                        : Center(
+                            child: Text(
+                              'No data.',
+                              style: body1.apply(),
+                            ),
+                          );
+                  }),
+                ),
+              ],
             ),
           ),
           Positioned(
