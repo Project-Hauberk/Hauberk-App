@@ -12,7 +12,7 @@ class ViewTitle extends ResponsiveTypeface {
         color: HauberkColors.green,
         fontSize: scaled(50, 40),
         fontWeight: FontWeight.w300,
-        fontFamily: 'Nunito',
+        fontFamily: 'Rubik',
       ),
     });
   }
@@ -23,9 +23,9 @@ class Heading1 extends ResponsiveTypeface {
     styleDelegates.addAll({
       const MobilePlatform(): TextStyle(
         color: HauberkColors.green,
-        fontSize: scaled(40, 30),
-        fontWeight: FontWeight.w400,
-        fontFamily: 'Nunito',
+        fontSize: scaled(34, 28),
+        fontWeight: FontWeight.w500,
+        fontFamily: 'Rubik',
       ),
     });
   }
@@ -36,9 +36,9 @@ class Body1 extends ResponsiveTypeface {
     styleDelegates.addAll({
       const MobilePlatform(): TextStyle(
         color: HauberkColors.green,
-        fontSize: scaled(18, 24),
+        fontSize: scaled(18, 14),
         fontWeight: FontWeight.w400,
-        fontFamily: 'Nunito',
+        fontFamily: 'Rubik',
       ),
     });
   }
@@ -51,7 +51,7 @@ class Body2 extends ResponsiveTypeface {
         color: HauberkColors.green,
         fontSize: scaled(10, 14),
         fontWeight: FontWeight.w300,
-        fontFamily: 'Nunito',
+        fontFamily: 'Rubik',
       ),
     });
   }
