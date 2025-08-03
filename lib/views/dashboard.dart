@@ -33,14 +33,26 @@ class DashboardViewState extends State<DashboardView> with ViewportScaling {
         FutureBuilder(
           future: (() async => accountsColl.get())(),
           builder: (ctx, snapshot) => snapshot.standardHandler(
-            () => Text(
+            () => HauberkTable.text(
+              columnLabels: const ['Account', 'Balance'],
+              columnAlignments: const [TextAlign.left, TextAlign.right],
+              values: [
+                for (QueryDocumentSnapshot<Account> doc
+                    in snapshot.data?.docs ?? const [])
+                  [
+                    doc.data().name.toString(),
+                    doc.data().balance.toStringAsFixed(2),
+                  ]
+              ],
+            ) /* Text(
               [
                 for (QueryDocumentSnapshot<Account> doc
                     in snapshot.data?.docs ?? const [])
                   "${doc.data().name}: ${doc.data().balance}"
               ].join('\n'),
               style: body1.apply(),
-            ),
+            ) */
+            ,
           ),
         ),
       ],
