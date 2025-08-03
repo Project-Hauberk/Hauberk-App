@@ -11,6 +11,7 @@ class DashboardViewState extends State<DashboardView> with ViewportScaling {
   @override
   Widget build(BuildContext context) {
     return ViewScaffold(
+      activeTabNum: 0,
       customViewTitle: FutureBuilder(
         future: profileDoc.get(),
         builder: (ctx, snapshot) => snapshot.standardHandler(

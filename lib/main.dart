@@ -1,6 +1,7 @@
 library hauberk.app;
 
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:project_redline/dimensions/dimensions.dart';
 import 'package:project_redline/multi_platform/multi_platform.dart';
@@ -20,10 +21,12 @@ part './design_system/view_scaffold.dart';
 part './design_system/table.dart';
 part './design_system/limited_list.dart';
 part './design_system/buttons/wide_button.dart';
+part './design_system/buttons/navbar_button.dart';
 
-part './views/transactions.dart';
 part './views/dashboard.dart';
+part './views/transactions.dart';
 part './views/budgeting.dart';
+part './views/assistant.dart';
 part './views/profile.dart';
 
 part './forms/add_transaction_form.dart';
@@ -70,6 +73,7 @@ class HauberkApp extends StatelessWidget {
         '/dashboard': (_) => const DashboardView(),
         '/transactions': (_) => const TransactionsView(),
         '/budgeting': (_) => const BudgetingView(),
+        '/assistant': (_) => const AssistantView(),
         '/profile': (_) => const ProfileView(),
       },
     );

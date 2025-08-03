@@ -7,6 +7,7 @@ class BudgetingView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewScaffold(
       viewLabel: 'Budgeting',
+      activeTabNum: 2,
       children: [
         Text('Actions', style: heading1.apply()),
         const SizedBox(height: 25),

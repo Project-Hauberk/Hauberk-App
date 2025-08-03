@@ -1,13 +1,13 @@
 part of 'package:hauberk/main.dart';
 
-class ProfileView extends StatelessWidget {
-  const ProfileView({super.key});
+class AssistantView extends StatelessWidget {
+  const AssistantView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ViewScaffold(
-      activeTabNum: 4,
-      viewLabel: 'Profile',
+      activeTabNum: 3,
+      viewLabel: 'Assistant',
       children: [
         Text(
           'Coming soon!',

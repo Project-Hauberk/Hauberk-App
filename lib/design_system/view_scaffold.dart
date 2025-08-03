@@ -5,8 +5,10 @@ class ViewScaffold extends StatelessWidget {
   final Widget? customViewTitle;
   final Widget? singleChild;
   final List<Widget>? multipleChildren;
+  final int activeTabNum;
 
   const ViewScaffold.single({
+    required this.activeTabNum,
     required Widget child,
     this.viewLabel,
     this.customViewTitle,
@@ -15,6 +17,7 @@ class ViewScaffold extends StatelessWidget {
         multipleChildren = const [];
 
   const ViewScaffold({
+    required this.activeTabNum,
     required List<Widget> children,
     this.viewLabel,
     this.customViewTitle,
@@ -49,13 +52,50 @@ class ViewScaffold extends StatelessWidget {
               ),
             ),
           ),
-          /* Positioned(
+          Positioned(
             bottom: 0,
             left: 0,
             right: 0,
             height: 62,
-            child: MobileNavBar(),
-          ), */
+            child: HauberkNavbar(
+              height: 120,
+              actions: [
+                () {
+                  if (activeTabNum != 0) {
+                    Navigator.of(context).pushNamed('/dashboard');
+                  }
+                },
+                () {
+                  if (activeTabNum != 1) {
+                    Navigator.of(context).pushNamed('/transactions');
+                  }
+                },
+                () {
+                  if (activeTabNum != 2) {
+                    Navigator.of(context).pushNamed('/budgeting');
+                  }
+                },
+                () {
+                  if (activeTabNum != 3) {
+                    Navigator.of(context).pushNamed('/assistant');
+                  }
+                },
+                () {
+                  if (activeTabNum != 4) {
+                    Navigator.of(context).pushNamed('/profile');
+                  }
+                },
+              ],
+              activeTab: activeTabNum,
+              icons: const [
+                Icons.dashboard,
+                Icons.view_list,
+                Icons.receipt_long,
+                Icons.person,
+                Icons.settings,
+              ],
+            ),
+          ),
         ],
       ),
     );

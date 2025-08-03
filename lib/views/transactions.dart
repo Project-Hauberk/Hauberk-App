@@ -13,9 +13,32 @@ class TransactionsViewState extends State<TransactionsView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: HauberkColors.darkGreen5,
-      bottomNavigationBar: mobileNavBar(context, 1),
+    return ViewScaffold(
+      viewLabel: 'Transactions',
+      activeTabNum: 1,
+      children: [
+        Text('Actions', style: heading1.apply()),
+        const SizedBox(height: 25),
+        Column(
+          children: [
+            WideButton.icon(
+              action: () {},
+              height: 70,
+              label: 'Create split payment',
+              prefixIcon: Icons.call_split,
+            ),
+            const SizedBox(height: 25),
+            WideButton.icon(
+              action: () {},
+              height: 70,
+              label: 'Scan a receipt/bill',
+              prefixIcon: Icons.document_scanner,
+            ),
+          ],
+        ),
+      ],
+    );
+    /* Scaffold(
       body: Stack(
         children: [
           Positioned.fill(
@@ -228,6 +251,6 @@ class TransactionsViewState extends State<TransactionsView> {
           ),
         ],
       ),
-    );
+    ); */
   }
 }

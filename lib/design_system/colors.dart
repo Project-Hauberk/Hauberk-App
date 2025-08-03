@@ -6,4 +6,5 @@ class HauberkColors {
   static const brightGreen5 = Color(0xFF4DAA57);
   static const brightGreen4 = Color(0xFF19381C);
   static const brightGreen2 = Color(0xFF387B3F);
+  static const brightGreen1 = Color(0xFF143C1A);
 }
