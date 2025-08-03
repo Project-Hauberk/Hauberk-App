@@ -16,6 +16,7 @@ part './firestore.dart';
 part './design_system/colors.dart';
 part './design_system/navbar.dart';
 part './design_system/type_system.dart';
+part './design_system/view_scaffold.dart';
 
 part './views/transactions.dart';
 part './views/dashboard.dart';

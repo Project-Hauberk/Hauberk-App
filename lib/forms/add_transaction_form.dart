@@ -58,18 +58,18 @@ class AddTransactionFormState extends State<AddTransactionForm> {
           width: Dimensions.width(),
           height: Dimensions.height() * 0.7,
           decoration: BoxDecoration(
-            color: HauberkColors.black,
+            color: HauberkColors.darkGreen5,
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(10),
               topRight: Radius.circular(10),
             ),
             border: Border.all(
-              color: HauberkColors.green,
+              color: HauberkColors.brightGreen5,
               strokeAlign: BorderSide.strokeAlignOutside,
             ),
             boxShadow: [
               BoxShadow(
-                color: HauberkColors.green.withOpacity(0.2),
+                color: HauberkColors.brightGreen5.withOpacity(0.2),
                 blurRadius: 20,
                 spreadRadius: 10,
               ),
@@ -92,17 +92,17 @@ class AddTransactionFormState extends State<AddTransactionForm> {
                         hintText: 'Describe the transaction',
                         hintStyle: body1.apply(
                           TextStyle(
-                            color: HauberkColors.green.withOpacity(0.3),
+                            color: HauberkColors.brightGreen5.withOpacity(0.3),
                           ),
                         ),
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
-                            color: HauberkColors.green.withOpacity(0.3),
+                            color: HauberkColors.brightGreen5.withOpacity(0.3),
                           ),
                         ),
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
-                            color: HauberkColors.green.withOpacity(0.5),
+                            color: HauberkColors.brightGreen5.withOpacity(0.5),
                           ),
                         ),
                       ),
@@ -119,22 +119,22 @@ class AddTransactionFormState extends State<AddTransactionForm> {
                         prefixIcon: Icon(
                           Icons.attach_money,
                           size: 24,
-                          color: HauberkColors.green.withOpacity(0.5),
+                          color: HauberkColors.brightGreen5.withOpacity(0.5),
                         ),
                         hintText: 'Amount',
                         hintStyle: body1.apply(
                           TextStyle(
-                            color: HauberkColors.green.withOpacity(0.3),
+                            color: HauberkColors.brightGreen5.withOpacity(0.3),
                           ),
                         ),
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
-                            color: HauberkColors.green.withOpacity(0.3),
+                            color: HauberkColors.brightGreen5.withOpacity(0.3),
                           ),
                         ),
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
-                            color: HauberkColors.green.withOpacity(0.5),
+                            color: HauberkColors.brightGreen5.withOpacity(0.5),
                           ),
                         ),
                       ),
@@ -158,17 +158,20 @@ class AddTransactionFormState extends State<AddTransactionForm> {
                               inputDecorationTheme: InputDecorationTheme(
                                 hintStyle: body1.apply(
                                   TextStyle(
-                                    color: HauberkColors.green.withOpacity(0.3),
+                                    color: HauberkColors.brightGreen5
+                                        .withOpacity(0.3),
                                   ),
                                 ),
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: HauberkColors.green.withOpacity(0.3),
+                                    color: HauberkColors.brightGreen5
+                                        .withOpacity(0.3),
                                   ),
                                 ),
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: HauberkColors.green.withOpacity(0.5),
+                                    color: HauberkColors.brightGreen5
+                                        .withOpacity(0.5),
                                   ),
                                 ),
                               ),
@@ -185,7 +188,8 @@ class AddTransactionFormState extends State<AddTransactionForm> {
                             Icon(
                               Icons.arrow_right,
                               size: 36,
-                              color: HauberkColors.green.withOpacity(0.6),
+                              color:
+                                  HauberkColors.brightGreen5.withOpacity(0.6),
                             ),
                             const SizedBox(width: 16),
                             DropdownMenu(
@@ -201,17 +205,20 @@ class AddTransactionFormState extends State<AddTransactionForm> {
                               inputDecorationTheme: InputDecorationTheme(
                                 hintStyle: body1.apply(
                                   TextStyle(
-                                    color: HauberkColors.green.withOpacity(0.3),
+                                    color: HauberkColors.brightGreen5
+                                        .withOpacity(0.3),
                                   ),
                                 ),
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: HauberkColors.green.withOpacity(0.3),
+                                    color: HauberkColors.brightGreen5
+                                        .withOpacity(0.3),
                                   ),
                                 ),
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: HauberkColors.green.withOpacity(0.5),
+                                    color: HauberkColors.brightGreen5
+                                        .withOpacity(0.5),
                                   ),
                                 ),
                               ),
@@ -239,17 +246,20 @@ class AddTransactionFormState extends State<AddTransactionForm> {
                           inputDecorationTheme: InputDecorationTheme(
                             hintStyle: body1.apply(
                               TextStyle(
-                                color: HauberkColors.green.withOpacity(0.3),
+                                color:
+                                    HauberkColors.brightGreen5.withOpacity(0.3),
                               ),
                             ),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color: HauberkColors.green.withOpacity(0.3),
+                                color:
+                                    HauberkColors.brightGreen5.withOpacity(0.3),
                               ),
                             ),
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color: HauberkColors.green.withOpacity(0.5),
+                                color:
+                                    HauberkColors.brightGreen5.withOpacity(0.5),
                               ),
                             ),
                           ),
@@ -274,17 +284,17 @@ class AddTransactionFormState extends State<AddTransactionForm> {
                         hintText: 'Timestamp',
                         hintStyle: body1.apply(
                           TextStyle(
-                            color: HauberkColors.green.withOpacity(0.3),
+                            color: HauberkColors.brightGreen5.withOpacity(0.3),
                           ),
                         ),
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
-                            color: HauberkColors.green.withOpacity(0.3),
+                            color: HauberkColors.brightGreen5.withOpacity(0.3),
                           ),
                         ),
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
-                            color: HauberkColors.green.withOpacity(0.5),
+                            color: HauberkColors.brightGreen5.withOpacity(0.5),
                           ),
                         ),
                       ),
@@ -301,7 +311,7 @@ class AddTransactionFormState extends State<AddTransactionForm> {
                         hintText: 'Transaction Type',
                         hintStyle: body1.apply(
                           TextStyle(
-                            color: HauberkColors.green.withOpacity(0.3),
+                            color: HauberkColors.brightGreen5.withOpacity(0.3),
                           ),
                         ),
                       ),
@@ -333,7 +343,7 @@ class AddTransactionFormState extends State<AddTransactionForm> {
                           height: 60,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: HauberkColors.green.withOpacity(0.6),
+                            color: HauberkColors.brightGreen5.withOpacity(0.6),
                           ),
                           child: Center(
                             child: Text(

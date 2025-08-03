@@ -2,9 +2,9 @@ part of 'package:hauberk/main.dart';
 
 BottomNavigationBar mobileNavBar(BuildContext context, [int index = 0]) =>
     BottomNavigationBar(
-      backgroundColor: HauberkColors.black,
-      unselectedItemColor: HauberkColors.green.withOpacity(0.3),
-      selectedItemColor: HauberkColors.green.withOpacity(0.7),
+      backgroundColor: HauberkColors.darkGreen5,
+      unselectedItemColor: HauberkColors.brightGreen5.withOpacity(0.3),
+      selectedItemColor: HauberkColors.brightGreen5.withOpacity(0.7),
       showUnselectedLabels: true,
       currentIndex: index,
       type: BottomNavigationBarType.fixed,

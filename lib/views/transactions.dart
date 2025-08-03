@@ -14,7 +14,7 @@ class TransactionsViewState extends State<TransactionsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: HauberkColors.black,
+      backgroundColor: HauberkColors.darkGreen5,
       bottomNavigationBar: mobileNavBar(context, 1),
       body: Stack(
         children: [
@@ -37,7 +37,7 @@ class TransactionsViewState extends State<TransactionsView> {
                     final List<TableRow> rows = [
                       TableRow(
                         decoration: BoxDecoration(
-                          color: HauberkColors.green.withOpacity(0.4),
+                          color: HauberkColors.brightGreen5.withOpacity(0.4),
                         ),
                         children: [
                           TableCell(
@@ -85,7 +85,7 @@ class TransactionsViewState extends State<TransactionsView> {
                       rows.add(
                         TableRow(
                           decoration: BoxDecoration(
-                            color: HauberkColors.green.withOpacity(0.1),
+                            color: HauberkColors.brightGreen5.withOpacity(0.1),
                           ),
                           children: [
                             TableCell(
@@ -173,7 +173,8 @@ class TransactionsViewState extends State<TransactionsView> {
                     return snapshot.data?.size != 0
                         ? Table(
                             border: TableBorder.all(
-                                color: HauberkColors.green.withOpacity(0.7)),
+                                color: HauberkColors.brightGreen5
+                                    .withOpacity(0.7)),
                             columnWidths: const {
                               0: FractionColumnWidth(0.25), // Description
                               2: FractionColumnWidth(0.25), // Amount
@@ -221,7 +222,7 @@ class TransactionsViewState extends State<TransactionsView> {
               icon: const Icon(
                 Icons.add,
                 size: 24,
-                color: HauberkColors.green,
+                color: HauberkColors.brightGreen5,
               ),
             ),
           ),

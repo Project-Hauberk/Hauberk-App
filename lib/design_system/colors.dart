@@ -1,6 +1,6 @@
 part of 'package:hauberk/main.dart';
 
 class HauberkColors {
-  static const black = Color(0xFF050D06);
-  static const green = Color(0xFF4DAA57);
+  static const darkGreen5 = Color(0xFF050D06);
+  static const brightGreen5 = Color(0xFF4DAA57);
 }
