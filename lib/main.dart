@@ -18,6 +18,8 @@ part './design_system/navbar.dart';
 part './design_system/type_system.dart';
 part './design_system/view_scaffold.dart';
 part './design_system/table.dart';
+part './design_system/limited_list.dart';
+part './design_system/buttons/wide_button.dart';
 
 part './views/transactions.dart';
 part './views/dashboard.dart';

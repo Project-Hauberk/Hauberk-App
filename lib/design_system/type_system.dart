@@ -24,7 +24,7 @@ class Heading1 extends ResponsiveTypeface {
     styleDelegates.addAll({
       const MobilePlatform(): TextStyle(
         color: HauberkColors.brightGreen5,
-        fontSize: scaled(34, 28),
+        fontSize: scaled(26, 22),
         fontWeight: FontWeight.w500,
         fontFamily: 'Rubik',
       ),
@@ -62,7 +62,7 @@ class TableHeader extends ResponsiveTypeface {
   TableHeader() {
     styleDelegates.addAll({
       const MobilePlatform(): TextStyle(
-        color: HauberkColors.brightGreen3,
+        color: HauberkColors.brightGreen5,
         fontSize: scaled(16, 12),
         fontWeight: FontWeight.w500,
         fontStyle: FontStyle.italic,

@@ -44,17 +44,43 @@ class DashboardViewState extends State<DashboardView> with ViewportScaling {
                     doc.data().balance.toStringAsFixed(2),
                   ]
               ],
-            ) /* Text(
-              [
-                for (QueryDocumentSnapshot<Account> doc
-                    in snapshot.data?.docs ?? const [])
-                  "${doc.data().name}: ${doc.data().balance}"
-              ].join('\n'),
-              style: body1.apply(),
-            ) */
-            ,
+            ),
           ),
         ),
+        const SizedBox(height: 50),
+        Text('Transactions Triage', style: heading1.apply()),
+        const SizedBox(height: 25),
+        SizedBox(
+          height: 120,
+          width: MediaQuery.of(context).size.width - 70,
+          child: FutureBuilder(
+            future: (() async => txnsColl.get())(),
+            builder: (ctx, snapshot) => snapshot.standardHandler(
+              () => LimitedList<(String amt, String txnDesc)>(
+                limit: 3,
+                values: [
+                  for (QueryDocumentSnapshot<Transaction> txn
+                      in snapshot.data?.docs ?? const [])
+                    (
+                      txn.data().amount.toStringAsFixed(2),
+                      txn.data().description,
+                    )
+                ],
+                itemBuilder: (data, ctx) => WideButton.string(
+                  action: () {},
+                  height: 40,
+                  label: data.$2,
+                  prefixString: data.$1,
+                ),
+                lastButtonBuilder: (itemCount) => WideButton.noPrefix(
+                  action: () {},
+                  height: 40,
+                  label: 'View all $itemCount transactions',
+                ),
+              ),
+            ),
+          ),
+        )
       ],
     );
   }
