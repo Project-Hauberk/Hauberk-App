@@ -10,6 +10,15 @@ abstract class Storable {
   JSON toJson();
 }
 
+final DocumentReference<Profile> profileDoc = firestore
+    .collection('users')
+    .withConverter(
+      fromFirestore: (snapshot, _) => Profile.fromJson(
+          snapshot.data() ?? (throw Exception('Null profile map'))),
+      toFirestore: (obj, _) => obj.toJson(),
+    )
+    .doc(userId);
+
 final CollectionReference<User> usersColl = firestore
     .collection('users')
     .withConverter<User>(

@@ -27,6 +27,7 @@ part './forms/add_transaction_form.dart';
 part './objects/transaction.dart';
 part './objects/user.dart';
 part './objects/account.dart';
+part './objects/profile.dart';
 part './objects/tag.dart';
 
 part './utils/utils.dart';

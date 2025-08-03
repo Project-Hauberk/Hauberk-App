@@ -18,9 +18,14 @@ class DashboardViewState extends State<DashboardView> with ViewportScaling {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Dashboard',
-                style: viewTitle.apply(),
+              FutureBuilder(
+                future: profileDoc.get(),
+                builder: (ctx, snapshot) => snapshot.standardHandler(
+                  () => Text(
+                    'Hello, ${snapshot.data?.data()?.displayName ?? 'user'}',
+                    style: viewTitle.apply(),
+                  ),
+                ),
               ),
               Text(
                 'Balances',

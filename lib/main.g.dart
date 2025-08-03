@@ -57,6 +57,14 @@ Map<String, dynamic> _$AccountToJson(Account instance) => <String, dynamic>{
       'ownerId': instance.ownerId,
     };
 
+Profile _$ProfileFromJson(Map<String, dynamic> json) => Profile(
+      displayName: json['displayName'] as String,
+    );
+
+Map<String, dynamic> _$ProfileToJson(Profile instance) => <String, dynamic>{
+      'displayName': instance.displayName,
+    };
+
 Tag _$TagFromJson(Map<String, dynamic> json) => Tag(
       label: json['label'] as String,
     );
