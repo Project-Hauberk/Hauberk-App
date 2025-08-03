@@ -1,14 +1,14 @@
 part of 'package:hauberk/main.dart';
 
 class ViewScaffold extends StatelessWidget {
-  final String? viewTitle;
+  final String? viewLabel;
   final Widget? customViewTitle;
   final Widget? singleChild;
   final List<Widget>? multipleChildren;
 
   const ViewScaffold.single({
     required Widget child,
-    this.viewTitle,
+    this.viewLabel,
     this.customViewTitle,
     super.key,
   })  : singleChild = child,
@@ -16,7 +16,7 @@ class ViewScaffold extends StatelessWidget {
 
   const ViewScaffold({
     required List<Widget> children,
-    this.viewTitle,
+    this.viewLabel,
     this.customViewTitle,
     super.key,
   })  : singleChild = null,
@@ -39,8 +39,8 @@ class ViewScaffold extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if (viewTitle != null)
-                    Text(viewTitle!, style: heading1.apply()),
+                  if (viewLabel != null)
+                    Text(viewLabel!, style: viewTitle.apply()),
                   if (customViewTitle != null) customViewTitle!,
                   const SizedBox(height: 50),
                   if (singleChild != null) singleChild!,

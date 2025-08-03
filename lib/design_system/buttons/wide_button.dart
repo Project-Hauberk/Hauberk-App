@@ -73,13 +73,12 @@ class WideButtonState extends State<WideButton> {
                       )
                     : Icon(
                         widget.prefixIcon!,
-                        size: widget.height - 20,
+                        size: widget.height - 24,
                         color: HauberkColors.brightGreen2,
                       ),
               ),
-              VerticalDivider(
+              const VerticalDivider(
                 thickness: 1,
-                width: widget.height,
                 color: HauberkColors.brightGreen4,
               ),
             ],
