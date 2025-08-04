@@ -333,8 +333,7 @@ class AddTransactionFormState extends State<AddTransactionForm> {
                                 _$TxnTypeEnumMap,
                                 txnTypeController.text.toLowerCase(),
                               ),
-                              timestamp:
-                                  DateTime.parse(timestampController.text),
+                              timestamp: double.parse(timestampController.text),
                             ),
                           );
                         },

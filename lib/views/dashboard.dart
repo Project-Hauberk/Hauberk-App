@@ -64,7 +64,7 @@ class DashboardViewState extends State<DashboardView> with ViewportScaling {
                       in snapshot.data?.docs ?? const [])
                     (
                       txn.data().amount.toStringAsFixed(2),
-                      txn.data().description,
+                      txn.data().description ?? '',
                     )
                 ],
                 itemBuilder: (data, ctx) => WideButton.string(

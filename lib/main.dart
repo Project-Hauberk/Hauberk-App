@@ -22,6 +22,8 @@ part './design_system/table.dart';
 part './design_system/limited_list.dart';
 part './design_system/buttons/wide_button.dart';
 part './design_system/buttons/navbar_button.dart';
+part './design_system/buttons/chip_button.dart';
+part './design_system/cards/txn_card.dart';
 
 part './views/dashboard.dart';
 part './views/transactions.dart';

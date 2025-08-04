@@ -8,8 +8,9 @@ class TransactionsView extends StatefulWidget {
 }
 
 class TransactionsViewState extends State<TransactionsView> {
-  final loadTableFuture = txnsColl.limit(20).get();
-  final Map<String, Account> accountsMap = {};
+  final List<QueryDocumentSnapshot<Transaction>> transactions = [];
+  final Future<QuerySnapshot<Transaction>> query =
+      txnsColl.orderBy('timestamp').limit(4).get();
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +18,41 @@ class TransactionsViewState extends State<TransactionsView> {
       viewLabel: 'Transactions',
       activeTabNum: 1,
       children: [
+        SizedBox(
+          width: 400,
+          height: 220,
+          child: FutureBuilder(
+            future: () async {
+              if (transactions.isEmpty) {
+                transactions.addAll((await query).docs);
+              } else {
+                transactions.addAll((await txnsColl
+                        .orderBy('timestamp')
+                        .limit(4)
+                        .startAfter([transactions.last.data()]).get())
+                    .docs);
+              }
+              return transactions;
+            }(),
+            builder: (ctx, snapshot) => snapshot.standardHandler(
+              () => SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    for (final doc in transactions)
+                      TxnCard(
+                        semanticCode: SemanticCode.green,
+                        transaction: doc.data(),
+                        width: 400,
+                        height: 220,
+                      ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: 25),
         Text('Actions', style: heading1.apply()),
         const SizedBox(height: 25),
         Column(

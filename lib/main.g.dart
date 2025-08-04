@@ -7,19 +7,19 @@ part of 'main.dart';
 // **************************************************************************
 
 Transaction _$TransactionFromJson(Map<String, dynamic> json) => Transaction(
-      description: json['description'] as String,
+      description: json['description'] as String?,
       tags: (json['tags'] as List<dynamic>).map((e) => e as String).toList(),
       amount: (json['amount'] as num).toDouble(),
-      fromAccountId: json['fromAccountId'] as String,
-      toAccountId: json['toAccountId'] as String,
+      fromAccountId: json['fromAccountId'] as String?,
+      toAccountId: json['toAccountId'] as String?,
       txnType: $enumDecode(_$TxnTypeEnumMap, json['txnType']),
-      timestamp: DateTime.parse(json['timestamp'] as String),
+      timestamp: (json['timestamp'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$TransactionToJson(Transaction instance) =>
     <String, dynamic>{
       'description': instance.description,
-      'timestamp': instance.timestamp.toIso8601String(),
+      'timestamp': instance.timestamp,
       'amount': instance.amount,
       'fromAccountId': instance.fromAccountId,
       'toAccountId': instance.toAccountId,

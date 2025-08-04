@@ -12,6 +12,12 @@ String generateId() => String.fromCharCodes(
       ),
     );
 
+SemanticCode txnTypeToCode(TxnType txnType) => switch (txnType) {
+      TxnType.inflow => SemanticCode.green,
+      TxnType.outflow => SemanticCode.yellow,
+      TxnType.transfer => SemanticCode.blue,
+    };
+
 extension SnapshotUtils on AsyncSnapshot {
   Widget standardHandler(Widget Function() builder) {
     switch (connectionState) {

@@ -11,11 +11,11 @@ enum TxnType {
 
 @JsonSerializable()
 class Transaction {
-  final String description;
-  final DateTime timestamp;
+  final String? description;
+  final double timestamp;
   final double amount;
-  final String fromAccountId;
-  final String toAccountId;
+  final String? fromAccountId;
+  final String? toAccountId;
   final TxnType txnType;
   final List<String> tags;
 
