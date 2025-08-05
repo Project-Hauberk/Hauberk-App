@@ -32,6 +32,7 @@ part './views/assistant.dart';
 part './views/profile.dart';
 
 part './forms/add_transaction_form.dart';
+part './forms/add_account_form.dart';
 
 part './objects/transaction.dart';
 part './objects/user.dart';

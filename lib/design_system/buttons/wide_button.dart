@@ -72,9 +72,12 @@ class WideButtonState extends State<WideButton> {
                   bottom: 7,
                 ),
                 child: widget.prefixIcon == null
-                    ? Text(
-                        widget.prefixString!,
-                        style: body1.apply(),
+                    ? SizedBox(
+                        width: 70,
+                        child: Text(
+                          widget.prefixString!,
+                          style: body1.apply(),
+                        ),
                       )
                     : Icon(
                         widget.prefixIcon!,

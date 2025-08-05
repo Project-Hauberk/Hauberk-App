@@ -9,10 +9,25 @@ class ProfileView extends StatelessWidget {
       activeTabNum: 4,
       viewLabel: 'Profile',
       children: [
-        Text(
-          'Coming soon!',
-          style: body1.apply(),
-        )
+        Text('Actions', style: heading1.apply()),
+        const SizedBox(height: 25),
+        Builder(
+          builder: (ctx) => Column(
+            children: [
+              WideButton.icon(
+                action: () async {
+                  await showModalBottomSheet(
+                    context: ctx,
+                    builder: (_) => const AddAccountForm(),
+                  );
+                },
+                height: 70,
+                label: 'Add account',
+                prefixIcon: Icons.account_balance,
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }
