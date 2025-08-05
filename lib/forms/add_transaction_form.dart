@@ -50,9 +50,10 @@ class AddTransactionFormState extends State<AddTransactionForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: Align(
+    return BottomSheet(
+      onClosing: () {},
+      backgroundColor: Colors.transparent,
+      builder: (ctx) => Align(
         alignment: Alignment.bottomCenter,
         child: Container(
           width: Dimensions.width(),
@@ -333,16 +334,21 @@ class AddTransactionFormState extends State<AddTransactionForm> {
                                 _$TxnTypeEnumMap,
                                 txnTypeController.text.toLowerCase(),
                               ),
-                              timestamp: double.parse(timestampController.text),
+                              timestamp:
+                                  DateTime.parse(timestampController.text)
+                                      .millisecondsSinceEpoch as double,
                             ),
                           );
+                          if (context.mounted) {
+                            Navigator.of(context).pop();
+                          }
                         },
                         child: Container(
                           width: 300,
                           height: 60,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: HauberkColors.brightGreen5.withOpacity(0.6),
+                            color: HauberkColors.brightGreen5.withOpacity(0.2),
                           ),
                           child: Center(
                             child: Text(

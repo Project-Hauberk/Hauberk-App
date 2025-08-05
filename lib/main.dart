@@ -71,6 +71,12 @@ class HauberkApp extends StatelessWidget {
     return MaterialApp(
       initialRoute: '/dashboard',
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        bottomSheetTheme: const BottomSheetThemeData(
+          surfaceTintColor: Colors.transparent,
+          backgroundColor: Colors.transparent,
+        ),
+      ),
       routes: {
         '/dashboard': (_) => const DashboardView(),
         '/transactions': (_) => const TransactionsView(),

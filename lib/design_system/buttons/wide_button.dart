@@ -42,19 +42,24 @@ class WideButton extends StatefulWidget {
 }
 
 class WideButtonState extends State<WideButton> {
+  bool pressing = false;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: widget.action,
+      onTapDown: (_) => setState(() => pressing = true),
+      onTapUp: (_) => setState(() => pressing = false),
       child: Container(
         width: double.infinity,
         height: widget.height,
         decoration: BoxDecoration(
           border: Border.all(color: HauberkColors.brightGreen4),
           borderRadius: BorderRadius.circular(10),
-          color: widget.highlighted
-              ? HauberkColors.brightGreen5.withOpacity(0.7)
-              : null,
+          color: pressing
+              ? HauberkColors.brightGreen5.withOpacity(0.1)
+              : widget.highlighted
+                  ? HauberkColors.brightGreen5.withOpacity(0.7)
+                  : null,
         ),
         child: Row(
           children: [
