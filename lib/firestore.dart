@@ -56,3 +56,13 @@ final CollectionReference<Transaction> txnsColl = firestore
           snapshot.data() ?? (throw Exception('Null txn map'))),
       toFirestore: (obj, _) => obj.toJson(),
     );
+
+final CollectionReference<RecurrentCashflow> recurrentCashflowsColl = firestore
+    .collection('users')
+    .doc(userId)
+    .collection('recurrent_cashflows')
+    .withConverter<RecurrentCashflow>(
+      fromFirestore: (snapshot, _) => RecurrentCashflow.fromJson(
+          snapshot.data() ?? (throw Exception('Null recurrent cashflow map'))),
+      toFirestore: (obj, _) => obj.toJson(),
+    );

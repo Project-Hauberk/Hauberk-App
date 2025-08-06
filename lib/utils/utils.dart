@@ -12,6 +12,9 @@ String generateId() => String.fromCharCodes(
       ),
     );
 
+String generateColorHex() =>
+    '#${_rnd.nextInt(16777215).toRadixString(16).padLeft(6, '0')}';
+
 SemanticCode txnTypeToCode(TxnType txnType) => switch (txnType) {
       TxnType.inflow => SemanticCode.green,
       TxnType.outflow => SemanticCode.yellow,
@@ -53,5 +56,15 @@ extension SnapshotUtils on AsyncSnapshot {
           ),
         );
     }
+  }
+}
+
+extension DateUtils on DateTime {
+  String toDDMMYYYY() =>
+      '${day.toString().padLeft(2, '0')}/${month.toString().padLeft(2, '0')}/${year.toString()}';
+  static DateTime fromDDMMYYYY(String value) {
+    final List<String> chunks = value.split('/');
+    return DateTime(
+        int.parse(chunks[2]), int.parse(chunks[1]), int.parse(chunks[0]));
   }
 }

@@ -72,3 +72,36 @@ Tag _$TagFromJson(Map<String, dynamic> json) => Tag(
 Map<String, dynamic> _$TagToJson(Tag instance) => <String, dynamic>{
       'label': instance.label,
     };
+
+RecurrentCashflow _$RecurrentCashflowFromJson(Map<String, dynamic> json) =>
+    RecurrentCashflow(
+      name: json['name'] as String,
+      amount: (json['amount'] as num).toDouble(),
+      cashflowType: $enumDecode(_$CashflowTypeEnumMap, json['cashflowType']),
+      frequency: $enumDecode(_$RecurrenceFrequencyEnumMap, json['frequency']),
+      wefDate: (json['wefDate'] as num).toInt(),
+      color: json['color'] as String,
+    );
+
+Map<String, dynamic> _$RecurrentCashflowToJson(RecurrentCashflow instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'amount': instance.amount,
+      'cashflowType': _$CashflowTypeEnumMap[instance.cashflowType]!,
+      'frequency': _$RecurrenceFrequencyEnumMap[instance.frequency]!,
+      'wefDate': instance.wefDate,
+      'color': instance.color,
+    };
+
+const _$CashflowTypeEnumMap = {
+  CashflowType.inflow: 'inflow',
+  CashflowType.outflow: 'outflow',
+};
+
+const _$RecurrenceFrequencyEnumMap = {
+  RecurrenceFrequency.daily: 'daily',
+  RecurrenceFrequency.weekly: 'weekly',
+  RecurrenceFrequency.biweekly: 'biweekly',
+  RecurrenceFrequency.monthly: 'monthly',
+  RecurrenceFrequency.yearly: 'yearly',
+};

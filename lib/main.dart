@@ -33,12 +33,14 @@ part './views/profile.dart';
 
 part './forms/add_transaction_form.dart';
 part './forms/add_account_form.dart';
+part './forms/recurring_cashflows_form.dart';
 
 part './objects/transaction.dart';
 part './objects/user.dart';
 part './objects/account.dart';
 part './objects/profile.dart';
 part './objects/tag.dart';
+part './objects/recurrent_cashflow.dart';
 
 part './utils/utils.dart';
 
