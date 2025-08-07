@@ -10,7 +10,7 @@ class TransactionsView extends StatefulWidget {
 class TransactionsViewState extends State<TransactionsView> {
   final List<QueryDocumentSnapshot<Transaction>> transactions = [];
   final Future<QuerySnapshot<Transaction>> query =
-      txnsColl.orderBy('timestamp').limit(4).get();
+      txnsColl.orderBy('timestamp', descending: true).limit(4).get();
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class TransactionsViewState extends State<TransactionsView> {
       activeTabNum: 1,
       children: [
         SizedBox(
-          width: 400,
+          width: Dimensions.width(),
           height: 220,
           child: FutureBuilder(
             future: () async {
@@ -27,7 +27,7 @@ class TransactionsViewState extends State<TransactionsView> {
                 transactions.addAll((await query).docs);
               } else {
                 transactions.addAll((await txnsColl
-                        .orderBy('timestamp')
+                        .orderBy('timestamp', descending: true)
                         .limit(4)
                         .startAfter([transactions.last.data()]).get())
                     .docs);
@@ -39,13 +39,15 @@ class TransactionsViewState extends State<TransactionsView> {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
-                    for (final doc in transactions)
+                    for (final doc in transactions) ...[
                       TxnCard(
                         semanticCode: SemanticCode.green,
                         transaction: doc.data(),
                         width: 400,
                         height: 220,
                       ),
+                      const SizedBox(width: 25),
+                    ]
                   ],
                 ),
               ),

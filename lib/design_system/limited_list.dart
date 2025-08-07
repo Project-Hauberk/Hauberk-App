@@ -32,7 +32,7 @@ class LimitedList<T> extends StatelessWidget {
 
   List<Widget> buildLimitedList(BuildContext context) {
     final List<Widget> widgets = [];
-    for (int i = 0; i < limit; i++) {
+    for (int i = 0; i < limit - 1; i++) {
       widgets.add(itemBuilder(values[i], context));
       widgets.add(const SizedBox(height: 15));
     }

@@ -52,7 +52,7 @@ class DashboardViewState extends State<DashboardView> with ViewportScaling {
         Text('Transactions Triage', style: heading1.apply()),
         const SizedBox(height: 25),
         SizedBox(
-          height: 120,
+          height: 150,
           width: MediaQuery.of(context).size.width - 70,
           child: FutureBuilder(
             future: (() async => txnsColl.get())(),
@@ -74,7 +74,9 @@ class DashboardViewState extends State<DashboardView> with ViewportScaling {
                   prefixString: data.$1,
                 ),
                 lastButtonBuilder: (itemCount) => WideButton.noPrefix(
-                  action: () {},
+                  action: () {
+                    Navigator.of(context).pushNamed('/transactions');
+                  },
                   height: 40,
                   label: 'View all $itemCount transactions',
                 ),

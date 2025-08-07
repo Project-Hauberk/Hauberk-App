@@ -323,6 +323,10 @@ class AddTransactionFormState extends State<AddTransactionForm> {
                       height: 60,
                       child: TextButton(
                         onPressed: () async {
+                          final TxnType txnType = $enumDecode(
+                            _$TxnTypeEnumMap,
+                            txnTypeController.text.toLowerCase(),
+                          );
                           await txnsColl.add(
                             Transaction(
                               description: descriptionController.text,
@@ -330,15 +334,58 @@ class AddTransactionFormState extends State<AddTransactionForm> {
                               amount: double.parse(amountController.text),
                               fromAccountId: fromAccId,
                               toAccountId: toAccId,
-                              txnType: $enumDecode(
-                                _$TxnTypeEnumMap,
-                                txnTypeController.text.toLowerCase(),
-                              ),
+                              txnType: txnType,
                               timestamp:
                                   DateTime.parse(timestampController.text)
                                       .millisecondsSinceEpoch as double,
                             ),
                           );
+                          if (txnType == TxnType.inflow) {
+                            final Account acc =
+                                (await accountsColl.doc(toAccId).get()).data()!;
+                            await accountsColl.doc(toAccId).set(
+                                  Account(
+                                    name: acc.name,
+                                    balance: acc.balance +
+                                        double.parse(amountController.text),
+                                    ownerId: acc.ownerId,
+                                  ),
+                                );
+                          } else if (txnType == TxnType.outflow) {
+                            final Account acc =
+                                (await accountsColl.doc(fromAccId).get())
+                                    .data()!;
+                            await accountsColl.doc(fromAccId).set(
+                                  Account(
+                                    name: acc.name,
+                                    balance: acc.balance -
+                                        double.parse(amountController.text),
+                                    ownerId: acc.ownerId,
+                                  ),
+                                );
+                          } else if (txnType == TxnType.transfer) {
+                            final Account fromAcc =
+                                (await accountsColl.doc(fromAccId).get())
+                                    .data()!;
+                            await accountsColl.doc(fromAccId).set(
+                                  Account(
+                                    name: fromAcc.name,
+                                    balance: fromAcc.balance -
+                                        double.parse(amountController.text),
+                                    ownerId: fromAcc.ownerId,
+                                  ),
+                                );
+                            final Account toAcc =
+                                (await accountsColl.doc(toAccId).get()).data()!;
+                            await accountsColl.doc(toAccId).set(
+                                  Account(
+                                    name: toAcc.name,
+                                    balance: toAcc.balance +
+                                        double.parse(amountController.text),
+                                    ownerId: toAcc.ownerId,
+                                  ),
+                                );
+                          }
                           if (context.mounted) {
                             Navigator.of(context).pop();
                           }
