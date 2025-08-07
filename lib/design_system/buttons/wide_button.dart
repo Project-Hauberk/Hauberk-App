@@ -58,7 +58,7 @@ class WideButtonState extends State<WideButton> {
           color: pressing
               ? HauberkColors.brightGreen5.withOpacity(0.1)
               : widget.highlighted
-                  ? HauberkColors.brightGreen5.withOpacity(0.7)
+                  ? HauberkColors.brightGreen5.withOpacity(0.095)
                   : null,
         ),
         child: Row(
