@@ -36,6 +36,15 @@ final CollectionReference<Account> accountsColl = firestore
           snapshot.data() ?? (throw Exception('Null account map'))),
       toFirestore: (obj, _) => obj.toJson(),
     );
+final CollectionReference<Account> externalAccountsColl = firestore
+    .collection('users')
+    .doc(userId)
+    .collection('external_accounts')
+    .withConverter<Account>(
+      fromFirestore: (snapshot, _) => Account.fromJson(
+          snapshot.data() ?? (throw Exception('Null account map'))),
+      toFirestore: (obj, _) => obj.toJson(),
+    );
 
 final CollectionReference<Tag> tagsColl = firestore
     .collection('users')

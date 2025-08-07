@@ -1,7 +1,9 @@
 part of 'package:hauberk/main.dart';
 
 class AddAccountForm extends StatefulWidget {
-  const AddAccountForm({super.key});
+  final bool externalAccount;
+
+  const AddAccountForm({required this.externalAccount, super.key});
 
   @override
   State<StatefulWidget> createState() => AddAccountFormState();
@@ -106,13 +108,23 @@ class AddAccountFormState extends State<AddAccountForm> {
                     height: 60,
                     child: TextButton(
                       onPressed: () async {
-                        await accountsColl.add(
-                          Account(
-                            name: nameController.text,
-                            balance: double.parse(amountController.text),
-                            ownerId: userId,
-                          ),
-                        );
+                        if (!widget.externalAccount) {
+                          await accountsColl.add(
+                            Account(
+                              name: nameController.text,
+                              balance: double.parse(amountController.text),
+                              ownerId: userId,
+                            ),
+                          );
+                        } else {
+                          await externalAccountsColl.add(
+                            Account(
+                              name: nameController.text,
+                              balance: double.parse(amountController.text),
+                              ownerId: '',
+                            ),
+                          );
+                        }
 
                         if (context.mounted) {
                           Navigator.of(context).pop();

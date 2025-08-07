@@ -49,6 +49,24 @@ class DashboardViewState extends State<DashboardView> with ViewportScaling {
           ),
         ),
         const SizedBox(height: 50),
+        FutureBuilder(
+          future: (() async => externalAccountsColl.get())(),
+          builder: (ctx, snapshot) => snapshot.standardHandler(
+            () => HauberkTable.text(
+              columnLabels: const ['External Account', 'Balance Owed'],
+              columnAlignments: const [TextAlign.left, TextAlign.right],
+              values: [
+                for (QueryDocumentSnapshot<Account> doc
+                    in snapshot.data?.docs ?? const [])
+                  [
+                    doc.data().name.toString(),
+                    doc.data().balance.toStringAsFixed(2),
+                  ]
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 50),
         Text('Transactions Triage', style: heading1.apply()),
         const SizedBox(height: 25),
         SizedBox(
@@ -74,6 +92,7 @@ class DashboardViewState extends State<DashboardView> with ViewportScaling {
                   prefixString: data.$1,
                 ),
                 lastButtonBuilder: (itemCount) => WideButton.noPrefix(
+                  highlighted: true,
                   action: () {
                     Navigator.of(context).pushNamed('/transactions');
                   },

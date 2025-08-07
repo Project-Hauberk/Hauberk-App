@@ -18,12 +18,25 @@ class ProfileView extends StatelessWidget {
                 action: () async {
                   await showModalBottomSheet(
                     context: ctx,
-                    builder: (_) => const AddAccountForm(),
+                    builder: (_) =>
+                        const AddAccountForm(externalAccount: false),
                   );
                 },
                 height: 70,
                 label: 'Add account',
                 prefixIcon: Icons.account_balance,
+              ),
+              const SizedBox(height: 25),
+              WideButton.icon(
+                action: () async {
+                  await showModalBottomSheet(
+                    context: ctx,
+                    builder: (_) => const AddAccountForm(externalAccount: true),
+                  );
+                },
+                height: 70,
+                label: 'Add external account',
+                prefixIcon: Icons.person_add,
               ),
             ],
           ),
