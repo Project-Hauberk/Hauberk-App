@@ -16,4 +16,14 @@ class Account {
       _$AccountFromJson(json);
 
   Map<String, dynamic> toJson() => _$AccountToJson(this);
+
+  @override
+  bool operator ==(Object other) =>
+      other is Account &&
+      other.name == name &&
+      other.balance == balance &&
+      other.ownerId == ownerId;
+
+  @override
+  int get hashCode => "$name$balance$ownerId".hashCode;
 }

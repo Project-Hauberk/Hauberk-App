@@ -73,7 +73,12 @@ class TransactionsViewState extends State<TransactionsView> {
               ),
               const SizedBox(height: 25),
               WideButton.icon(
-                action: () {},
+                action: () async {
+                  await showModalBottomSheet(
+                    context: ctx,
+                    builder: (_) => const SplitPaymentForm(),
+                  );
+                },
                 height: 70,
                 label: 'Create split payment',
                 prefixIcon: Icons.call_split,

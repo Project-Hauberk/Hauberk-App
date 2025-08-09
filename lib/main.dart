@@ -34,6 +34,7 @@ part './views/profile.dart';
 part './forms/add_transaction_form.dart';
 part './forms/add_account_form.dart';
 part './forms/recurring_cashflows_form.dart';
+part './forms/split_payment_form.dart';
 
 part './objects/transaction.dart';
 part './objects/user.dart';

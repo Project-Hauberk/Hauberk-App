@@ -53,7 +53,7 @@ class DashboardViewState extends State<DashboardView> with ViewportScaling {
           future: (() async => externalAccountsColl.get())(),
           builder: (ctx, snapshot) => snapshot.standardHandler(
             () => HauberkTable.text(
-              columnLabels: const ['External Account', 'Balance Owed'],
+              columnLabels: const ['External Account', 'Balance'],
               columnAlignments: const [TextAlign.left, TextAlign.right],
               values: [
                 for (QueryDocumentSnapshot<Account> doc
