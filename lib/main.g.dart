@@ -105,3 +105,15 @@ const _$RecurrenceFrequencyEnumMap = {
   RecurrenceFrequency.monthly: 'monthly',
   RecurrenceFrequency.yearly: 'yearly',
 };
+
+Goal _$GoalFromJson(Map<String, dynamic> json) => Goal(
+      name: json['name'] as String,
+      deadline: (json['deadline'] as num).toInt(),
+      target: (json['target'] as num).toDouble(),
+    );
+
+Map<String, dynamic> _$GoalToJson(Goal instance) => <String, dynamic>{
+      'name': instance.name,
+      'deadline': instance.deadline,
+      'target': instance.target,
+    };

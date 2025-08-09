@@ -75,3 +75,13 @@ final CollectionReference<RecurrentCashflow> recurrentCashflowsColl = firestore
           snapshot.data() ?? (throw Exception('Null recurrent cashflow map'))),
       toFirestore: (obj, _) => obj.toJson(),
     );
+
+final CollectionReference<Goal> goalsColl = firestore
+    .collection('users')
+    .doc(userId)
+    .collection('goals')
+    .withConverter<Goal>(
+      fromFirestore: (snapshot, _) =>
+          Goal.fromJson(snapshot.data() ?? (throw Exception('Null goal map'))),
+      toFirestore: (obj, _) => obj.toJson(),
+    );

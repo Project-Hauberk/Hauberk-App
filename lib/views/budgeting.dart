@@ -15,7 +15,12 @@ class BudgetingView extends StatelessWidget {
           builder: (ctx) => Column(
             children: [
               WideButton.icon(
-                action: () {},
+                action: () async {
+                  await showModalBottomSheet(
+                    context: ctx,
+                    builder: (_) => const AddGoalForm(),
+                  );
+                },
                 height: 70,
                 label: 'Create financial goals',
                 prefixIcon: Icons.track_changes_outlined,
