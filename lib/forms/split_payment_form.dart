@@ -10,7 +10,9 @@ class SplitPaymentForm extends StatefulWidget {
 class SplitPaymentFormState extends State<SplitPaymentForm> {
   late final Future<List<QueryDocumentSnapshot<Account>>> loadAccountsFuture =
       () async {
-    accounts.addAll((await accountsColl.get()).docs);
+    accounts
+      ..addAll((await accountsColl.get()).docs)
+      ..addAll((await externalAccountsColl.get()).docs);
     return accounts;
   }();
   final List<QueryDocumentSnapshot<Account>> accounts = [];
@@ -128,41 +130,88 @@ class SplitPaymentFormState extends State<SplitPaymentForm> {
                               children: [...buildSplitsEntries(context)],
                             ),
                           ),
-
-                        SizedBox(
-                          width: 160,
-                          height: 80,
-                          child: TextButton(
-                            onPressed: () {
-                              setState(() {
-                                splits.add(
-                                  (
-                                    account: accounts.first.data(),
-                                    amountController: TextEditingController()
-                                      ..text = '0',
+                        const SizedBox(height: 40),
+                        chosenTransaction != null
+                            ? SizedBox(
+                                width: 160,
+                                height: 80,
+                                child: TextButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      splits.add(
+                                        (
+                                          account: accounts.first.data(),
+                                          amountController:
+                                              TextEditingController()
+                                                ..text = '0',
+                                        ),
+                                      );
+                                    });
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.add,
+                                      ),
+                                      const Spacer(),
+                                      Text('Add new'),
+                                    ],
                                   ),
-                                );
-                              });
-                            },
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.add,
                                 ),
-                                const Spacer(),
-                                Text('Add new'),
-                              ],
-                            ),
-                          ),
-                        ),
+                              )
+                            : TextButton(
+                                onPressed: () async {
+                                  final Transaction? txn =
+                                      await showModalBottomSheet(
+                                    context: ctx,
+                                    builder: (_) => const AddTransactionForm(),
+                                  );
+                                  if (txn != null) {
+                                    setState(() {
+                                      chosenTransaction = txn;
+                                    });
+                                  }
+                                },
+                                child: Text('Add a transaction'),
+                              ),
                         const SizedBox(height: 60),
                         SizedBox(
                           width: 300,
                           height: 60,
                           child: TextButton(
                             onPressed: () async {
-                              if (context.mounted) {
-                                Navigator.of(context).pop();
+                              if (validateForm()) {
+                                for (final split in splits) {
+                                  if (split.account.ownerId == userId) {
+                                    final accDoc = (await accountsColl
+                                            .where('name',
+                                                isEqualTo: split.account.name)
+                                            .limit(1)
+                                            .get())
+                                        .docs[0];
+                                    accountsColl.doc(accDoc.id).update({
+                                      'balance': accDoc.data().balance -
+                                          double.parse(
+                                              split.amountController.text)
+                                    });
+                                  } else {
+                                    final accDoc = (await externalAccountsColl
+                                            .where('name',
+                                                isEqualTo: split.account.name)
+                                            .limit(1)
+                                            .get())
+                                        .docs[0];
+                                    externalAccountsColl.doc(accDoc.id).update({
+                                      'balance': accDoc.data().balance -
+                                          double.parse(
+                                              split.amountController.text)
+                                    });
+                                  }
+                                }
+                                accountsColl.doc();
+                                if (context.mounted) {
+                                  Navigator.of(context).pop();
+                                }
                               }
                             },
                             child: Container(
@@ -354,6 +403,23 @@ class SplitPaymentFormState extends State<SplitPaymentForm> {
         ],
       ),
     );
+  }
+
+  bool validateForm() {
+    final List<Account> usedAccs = [];
+    for (final split in splits) {
+      if (usedAccs.contains(split.account)) {
+        return false;
+      } else {
+        usedAccs.add(split.account);
+      }
+      if (double.parse(fromAccAmtController.text).isNegative) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+    return true;
   }
 
   @override

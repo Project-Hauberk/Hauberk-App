@@ -327,8 +327,9 @@ class AddTransactionFormState extends State<AddTransactionForm> {
                             _$TxnTypeEnumMap,
                             txnTypeController.text.toLowerCase(),
                           );
+                          final Transaction txn;
                           await txnsColl.add(
-                            Transaction(
+                            txn = Transaction(
                               description: descriptionController.text,
                               tags: [tagsController.text],
                               amount: double.parse(amountController.text),
@@ -387,7 +388,7 @@ class AddTransactionFormState extends State<AddTransactionForm> {
                                 );
                           }
                           if (context.mounted) {
-                            Navigator.of(context).pop();
+                            Navigator.of(context).pop(txn);
                           }
                         },
                         child: Container(
