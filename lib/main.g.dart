@@ -59,10 +59,12 @@ Map<String, dynamic> _$AccountToJson(Account instance) => <String, dynamic>{
 
 Profile _$ProfileFromJson(Map<String, dynamic> json) => Profile(
       displayName: json['displayName'] as String,
+      linkedGoogleSheet: json['linkedGoogleSheet'] as String?,
     );
 
 Map<String, dynamic> _$ProfileToJson(Profile instance) => <String, dynamic>{
       'displayName': instance.displayName,
+      'linkedGoogleSheet': instance.linkedGoogleSheet,
     };
 
 Tag _$TagFromJson(Map<String, dynamic> json) => Tag(
