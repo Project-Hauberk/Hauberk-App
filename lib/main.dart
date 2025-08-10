@@ -2,6 +2,7 @@ library hauberk.app;
 
 // Responsive Design
 import 'dart:math';
+import 'package:flutter/foundation.dart';
 import 'package:project_redline/dimensions/dimensions.dart';
 import 'package:project_redline/multi_platform/multi_platform.dart';
 
@@ -75,8 +76,9 @@ void main(List<String> args) async {
   );
 
   app = await Firebase.initializeApp(options: webOptions);
-  firestore = FirebaseFirestore.instance
-    ..useFirestoreEmulator('127.0.0.1', 8080);
+  firestore = kDebugMode
+      ? (FirebaseFirestore.instance..useFirestoreEmulator('127.0.0.1', 8080))
+      : FirebaseFirestore.instance;
   runApp(const HauberkApp());
 }
 

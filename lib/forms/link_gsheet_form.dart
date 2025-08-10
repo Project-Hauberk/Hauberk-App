@@ -2,8 +2,11 @@ part of 'package:hauberk/main.dart';
 
 class LinkGsheetForm extends StatefulWidget {
   final AuthClient authClient;
+  final String? linkedSheetId;
+
   const LinkGsheetForm({
     required this.authClient,
+    this.linkedSheetId,
     super.key,
   });
 
@@ -18,6 +21,12 @@ class LinkGsheetFormState extends State<LinkGsheetForm> {
           .list(q: "mimeType='application/vnd.google-apps.spreadsheet'");
 
   String? linkedGoogleSheetId;
+
+  @override
+  void initState() {
+    linkedGoogleSheetId = widget.linkedSheetId;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +70,7 @@ class LinkGsheetFormState extends State<LinkGsheetForm> {
                       builder: (ctx, snapshot) => snapshot.standardHandler(
                         () => DropdownMenu(
                           label: const Text('Select a spreadsheet'),
+                          initialSelection: linkedGoogleSheetId,
                           onSelected: (value) => linkedGoogleSheetId = value,
                           inputDecorationTheme: InputDecorationTheme(
                             hintStyle: body1.apply(
@@ -102,6 +112,9 @@ class LinkGsheetFormState extends State<LinkGsheetForm> {
                         onPressed: () async {
                           await profileDoc.update(
                               {'linkedGoogleSheet': linkedGoogleSheetId});
+                          if (context.mounted) {
+                            Navigator.of(context).pop();
+                          }
                         },
                         child: Container(
                           width: 300,
