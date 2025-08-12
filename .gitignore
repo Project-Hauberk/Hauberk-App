@@ -52,3 +52,7 @@ app.*.map.json
 # Dev
 secrets.dart
 /data
+.env
+
+# Certificates
+/certs

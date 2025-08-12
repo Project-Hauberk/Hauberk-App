@@ -2,6 +2,7 @@ library hauberk.app;
 
 // Responsive Design
 import 'dart:math';
+import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:project_redline/dimensions/dimensions.dart';
 import 'package:project_redline/multi_platform/multi_platform.dart';
@@ -44,6 +45,7 @@ part './views/profile.dart';
 part './forms/add_transaction_form.dart';
 part './forms/add_account_form.dart';
 part './forms/recurring_cashflows_form.dart';
+part './forms/create_monthly_budget_form.dart';
 part './forms/split_payment_form.dart';
 part './forms/add_goal_form.dart';
 part './forms/link_gsheet_form.dart';
@@ -54,6 +56,7 @@ part './objects/account.dart';
 part './objects/profile.dart';
 part './objects/tag.dart';
 part './objects/recurrent_cashflow.dart';
+part './objects/budgeted_event.dart';
 part './objects/goal.dart';
 
 part './utils/utils.dart';

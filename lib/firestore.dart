@@ -76,6 +76,16 @@ final CollectionReference<RecurrentCashflow> recurrentCashflowsColl = firestore
       toFirestore: (obj, _) => obj.toJson(),
     );
 
+final CollectionReference<RecurrentCashflow> budgetedEventsColl = firestore
+    .collection('users')
+    .doc(userId)
+    .collection('budgeted_events')
+    .withConverter<BudgetedEvent>(
+      fromFirestore: (snapshot, _) => BudgetedEvent.fromJson(
+          snapshot.data() ?? (throw Exception('Null budgeted event map'))),
+      toFirestore: (obj, _) => obj.toJson(),
+    );
+
 final CollectionReference<Goal> goalsColl = firestore
     .collection('users')
     .doc(userId)

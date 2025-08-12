@@ -39,7 +39,13 @@ class BudgetingView extends StatelessWidget {
               ),
               const SizedBox(height: 25),
               WideButton.icon(
-                action: () {},
+                action: () async {
+                  await showModalBottomSheet(
+                    context: ctx,
+                    isScrollControlled: true,
+                    builder: (_) => const CreateMonthlyBudgetForm(),
+                  );
+                },
                 height: 70,
                 label: 'Create monthly budget',
                 prefixIcon: Icons.receipt_long,

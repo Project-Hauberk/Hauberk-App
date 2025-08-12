@@ -60,11 +60,15 @@ Map<String, dynamic> _$AccountToJson(Account instance) => <String, dynamic>{
 Profile _$ProfileFromJson(Map<String, dynamic> json) => Profile(
       displayName: json['displayName'] as String,
       linkedGoogleSheet: json['linkedGoogleSheet'] as String?,
+      savingsAccountIds: (json['savingsAccountIds'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
     );
 
 Map<String, dynamic> _$ProfileToJson(Profile instance) => <String, dynamic>{
       'displayName': instance.displayName,
       'linkedGoogleSheet': instance.linkedGoogleSheet,
+      'savingsAccountIds': instance.savingsAccountIds,
     };
 
 Tag _$TagFromJson(Map<String, dynamic> json) => Tag(
@@ -107,6 +111,22 @@ const _$RecurrenceFrequencyEnumMap = {
   RecurrenceFrequency.monthly: 'monthly',
   RecurrenceFrequency.yearly: 'yearly',
 };
+
+BudgetedEvent _$BudgetedEventFromJson(Map<String, dynamic> json) =>
+    BudgetedEvent(
+      name: json['name'] as String,
+      amount: (json['amount'] as num).toDouble(),
+      date: (json['date'] as num).toInt(),
+      tags: (json['tags'] as List<dynamic>).map((e) => e as String).toList(),
+    );
+
+Map<String, dynamic> _$BudgetedEventToJson(BudgetedEvent instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'amount': instance.amount,
+      'date': instance.date,
+      'tags': instance.tags,
+    };
 
 Goal _$GoalFromJson(Map<String, dynamic> json) => Goal(
       name: json['name'] as String,
