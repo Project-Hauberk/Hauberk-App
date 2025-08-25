@@ -128,6 +128,29 @@ Map<String, dynamic> _$BudgetedEventToJson(BudgetedEvent instance) =>
       'tags': instance.tags,
     };
 
+MonthlyBudget _$MonthlyBudgetFromJson(Map<String, dynamic> json) =>
+    MonthlyBudget(
+      name: json['name'] as String,
+      recurrentCashflowIds: (json['recurrentCashflowIds'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+      savingsContributions:
+          (json['savingsContributions'] as Map<String, dynamic>).map(
+        (k, e) => MapEntry(k, (e as num).toDouble()),
+      ),
+      budgetedEventIds: (json['budgetedEventIds'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+    );
+
+Map<String, dynamic> _$MonthlyBudgetToJson(MonthlyBudget instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'recurrentCashflowIds': instance.recurrentCashflowIds,
+      'savingsContributions': instance.savingsContributions,
+      'budgetedEventIds': instance.budgetedEventIds,
+    };
+
 Goal _$GoalFromJson(Map<String, dynamic> json) => Goal(
       name: json['name'] as String,
       deadline: (json['deadline'] as num).toInt(),

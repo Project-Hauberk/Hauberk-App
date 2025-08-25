@@ -11,7 +11,7 @@ class CreateMonthlyBudgetFormState extends State<CreateMonthlyBudgetForm> {
   final List<QueryDocumentSnapshot<RecurrentCashflow>> recurringCashflows = [];
   final Map<String, (QueryDocumentSnapshot<Account>, double)> savingsAccounts =
       {};
-  final List<BudgetedEvent> budgetedEvents = [];
+  final List<DocumentSnapshot<BudgetedEvent>> budgetedEvents = [];
   bool queried = false;
   double postStashAmt = 0;
 
@@ -49,7 +49,7 @@ class CreateMonthlyBudgetFormState extends State<CreateMonthlyBudgetForm> {
       }
     }
     for (final event in budgetedEvents) {
-      res -= event.amount;
+      res -= event.data()!.amount;
     }
 
     return res;
@@ -163,8 +163,7 @@ class CreateMonthlyBudgetFormState extends State<CreateMonthlyBudgetForm> {
                                           ),
                                           const Spacer(),
                                           Text(
-                                            (entry.$2 * postStashAmt)
-                                                .toStringAsFixed(2),
+                                            '${(entry.$2 * 100).round()}% (${(entry.$2 * postStashAmt).toStringAsFixed(2)})',
                                             style: body1.apply(),
                                           ),
                                         ],
@@ -197,15 +196,29 @@ class CreateMonthlyBudgetFormState extends State<CreateMonthlyBudgetForm> {
                                   WideButton.string(
                                     action: () {},
                                     height: 80,
-                                    label: budgetedEvent.name,
-                                    prefixString:
-                                        budgetedEvent.amount.toStringAsFixed(2),
+                                    label: budgetedEvent.data()!.name,
+                                    prefixString: budgetedEvent
+                                        .data()!
+                                        .amount
+                                        .toStringAsFixed(2),
                                   ),
                                 WideButton.icon(
                                   action: () async {
-                                    // await the budgeted event bottomsheet
-                                    // add to list
-                                    // set state
+                                    final BudgetedEvent? budgetedEvent =
+                                        await showModalBottomSheet(
+                                      context: ctx,
+                                      isScrollControlled: true,
+                                      builder: (_) =>
+                                          const AddBudgetedEventForm(),
+                                    );
+                                    if (budgetedEvent != null) {
+                                      budgetedEvents.add(
+                                          await (await budgetedEventsColl
+                                                  .add(budgetedEvent))
+                                              .get());
+                                      ;
+                                      setState(() {});
+                                    }
                                   },
                                   height: 80,
                                   label: 'Add new event',
@@ -218,8 +231,26 @@ class CreateMonthlyBudgetFormState extends State<CreateMonthlyBudgetForm> {
                                 height: 60,
                                 child: TextButton(
                                   onPressed: () async {
+                                    final MonthlyBudget monthlyBudget =
+                                        MonthlyBudget(
+                                      name: '',
+                                      recurrentCashflowIds: recurringCashflows
+                                          .map((doc) => doc.id)
+                                          .toList(),
+                                      savingsContributions: {
+                                        for (final entry
+                                            in savingsAccounts.entries.where(
+                                                (entry) => entry.value.$2 != 0))
+                                          entry.key:
+                                              entry.value.$2 * postStashAmt
+                                      },
+                                      budgetedEventIds: budgetedEvents
+                                          .map((doc) => doc.id)
+                                          .toList(),
+                                    );
+                                    await monthlyBudgetsColl.add(monthlyBudget);
                                     if (context.mounted) {
-                                      Navigator.of(context).pop();
+                                      Navigator.of(context).pop(monthlyBudget);
                                     }
                                   },
                                   child: Container(
