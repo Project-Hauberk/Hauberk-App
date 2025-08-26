@@ -333,12 +333,13 @@ class AddTransactionFormState extends State<AddTransactionForm> {
                               description: descriptionController.text,
                               tags: [tagsController.text],
                               amount: double.parse(amountController.text),
-                              fromAccountId: fromAccId,
-                              toAccountId: toAccId,
+                              fromAccountId: fromAccId == '' ? null : fromAccId,
+                              toAccountId: toAccId == '' ? null : toAccId,
                               txnType: txnType,
                               timestamp:
                                   DateTime.parse(timestampController.text)
                                       .millisecondsSinceEpoch as double,
+                              budgetedEventId: null,
                             ),
                           );
                           if (txnType == TxnType.inflow) {

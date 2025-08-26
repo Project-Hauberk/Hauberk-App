@@ -8,6 +8,7 @@ class CreateMonthlyBudgetForm extends StatefulWidget {
 }
 
 class CreateMonthlyBudgetFormState extends State<CreateMonthlyBudgetForm> {
+  final TextEditingController startDateController = TextEditingController();
   final List<QueryDocumentSnapshot<RecurrentCashflow>> recurringCashflows = [];
   final Map<String, (QueryDocumentSnapshot<Account>, double)> savingsAccounts =
       {};
@@ -104,6 +105,37 @@ class CreateMonthlyBudgetFormState extends State<CreateMonthlyBudgetForm> {
                           width: Dimensions.width() * 0.7,
                           child: Column(
                             children: [
+                              Row(
+                                children: [
+                                  TextField(
+                                    controller: startDateController,
+                                    style: body1.apply(),
+                                    textInputAction: TextInputAction.next,
+                                    decoration: InputDecoration(
+                                      hintText: 'Start Date',
+                                      hintStyle: body1.apply(
+                                        TextStyle(
+                                          color: HauberkColors.brightGreen5
+                                              .withOpacity(0.3),
+                                        ),
+                                      ),
+                                      enabledBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: HauberkColors.brightGreen5
+                                              .withOpacity(0.3),
+                                        ),
+                                      ),
+                                      focusedBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: HauberkColors.brightGreen5
+                                              .withOpacity(0.5),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 25),
                               SizedBox(
                                 width: double.infinity,
                                 child: Text(
@@ -247,6 +279,15 @@ class CreateMonthlyBudgetFormState extends State<CreateMonthlyBudgetForm> {
                                       budgetedEventIds: budgetedEvents
                                           .map((doc) => doc.id)
                                           .toList(),
+                                      start: DateUtils.fromDDMMYYYY(
+                                              startDateController.text)
+                                          .millisecondsSinceEpoch,
+                                      end: DateUtils.fromDDMMYYYY(
+                                              startDateController.text)
+                                          .add(
+                                            const Duration(days: 30),
+                                          )
+                                          .millisecondsSinceEpoch,
                                     );
                                     await monthlyBudgetsColl.add(monthlyBudget);
                                     if (context.mounted) {

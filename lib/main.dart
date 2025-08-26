@@ -2,7 +2,6 @@ library hauberk.app;
 
 // Responsive Design
 import 'dart:math';
-import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:project_redline/dimensions/dimensions.dart';
 import 'package:project_redline/multi_platform/multi_platform.dart';

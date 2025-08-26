@@ -14,6 +14,7 @@ Transaction _$TransactionFromJson(Map<String, dynamic> json) => Transaction(
       toAccountId: json['toAccountId'] as String?,
       txnType: $enumDecode(_$TxnTypeEnumMap, json['txnType']),
       timestamp: (json['timestamp'] as num).toDouble(),
+      budgetedEventId: json['budgetedEventId'] as String?,
     );
 
 Map<String, dynamic> _$TransactionToJson(Transaction instance) =>
@@ -25,6 +26,7 @@ Map<String, dynamic> _$TransactionToJson(Transaction instance) =>
       'toAccountId': instance.toAccountId,
       'txnType': _$TxnTypeEnumMap[instance.txnType]!,
       'tags': instance.tags,
+      'budgetedEventId': instance.budgetedEventId,
     };
 
 const _$TxnTypeEnumMap = {
@@ -141,6 +143,8 @@ MonthlyBudget _$MonthlyBudgetFromJson(Map<String, dynamic> json) =>
       budgetedEventIds: (json['budgetedEventIds'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
+      start: (json['start'] as num).toInt(),
+      end: (json['end'] as num).toInt(),
     );
 
 Map<String, dynamic> _$MonthlyBudgetToJson(MonthlyBudget instance) =>
@@ -149,6 +153,8 @@ Map<String, dynamic> _$MonthlyBudgetToJson(MonthlyBudget instance) =>
       'recurrentCashflowIds': instance.recurrentCashflowIds,
       'savingsContributions': instance.savingsContributions,
       'budgetedEventIds': instance.budgetedEventIds,
+      'start': instance.start,
+      'end': instance.end,
     };
 
 Goal _$GoalFromJson(Map<String, dynamic> json) => Goal(

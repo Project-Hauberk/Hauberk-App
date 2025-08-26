@@ -18,6 +18,7 @@ class Transaction {
   final String? toAccountId;
   final TxnType txnType;
   final List<String> tags;
+  final String? budgetedEventId;
 
   const Transaction({
     required this.description,
@@ -27,6 +28,7 @@ class Transaction {
     required this.toAccountId,
     required this.txnType,
     required this.timestamp,
+    required this.budgetedEventId,
   });
 
   factory Transaction.fromJson(Map<String, dynamic> json) =>
