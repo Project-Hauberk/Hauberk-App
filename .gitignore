@@ -53,6 +53,7 @@ app.*.map.json
 secrets.dart
 /data
 .env
+debug.sh
 
 # Certificates
 /certs
