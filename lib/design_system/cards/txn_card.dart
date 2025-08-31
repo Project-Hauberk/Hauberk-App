@@ -78,7 +78,8 @@ class TxnCard extends StatelessWidget {
                               snapshot.data!.$1,
                               style: body1.apply(
                                 TextStyle(
-                                  fontWeight: (snapshot.data!.$2) == userId
+                                  fontWeight: (snapshot.data!.$2) ==
+                                          FirebaseAuth.instance.currentUser!.uid
                                       ? FontWeight.w500
                                       : FontWeight.w300,
                                   color: HauberkColors.brightGreen5
@@ -113,7 +114,8 @@ class TxnCard extends StatelessWidget {
                               snapshot.data!.$1,
                               style: body1.apply(
                                 TextStyle(
-                                  fontWeight: (snapshot.data!.$2) == userId
+                                  fontWeight: (snapshot.data!.$2) ==
+                                          FirebaseAuth.instance.currentUser!.uid
                                       ? FontWeight.w500
                                       : FontWeight.w300,
                                   color: HauberkColors.brightGreen5

@@ -26,8 +26,8 @@ class AddTransactionFormState extends State<AddTransactionForm> {
 
   void updateTxnType() {
     final String txnType;
-    if (accOwners.$1 == userId) {
-      if (accOwners.$2 == userId) {
+    if (accOwners.$1 == FirebaseAuth.instance.currentUser!.uid) {
+      if (accOwners.$2 == FirebaseAuth.instance.currentUser!.uid) {
         txnType = 'Transfer';
       } else if (accOwners.$2 == '') {
         txnType = 'Outflow';
@@ -38,7 +38,7 @@ class AddTransactionFormState extends State<AddTransactionForm> {
       if (accOwners.$1 == '') {
         txnType = 'Inflow';
       } else {
-        if (accOwners.$2 == userId) {
+        if (accOwners.$2 == FirebaseAuth.instance.currentUser!.uid) {
           txnType = 'Inflow or Payment';
         } else {
           throw Exception('All clauses matched');

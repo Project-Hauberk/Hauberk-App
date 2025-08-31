@@ -113,7 +113,7 @@ class AddAccountFormState extends State<AddAccountForm> {
                             Account(
                               name: nameController.text,
                               balance: double.parse(amountController.text),
-                              ownerId: userId,
+                              ownerId: FirebaseAuth.instance.currentUser!.uid,
                             ),
                           );
                         } else {

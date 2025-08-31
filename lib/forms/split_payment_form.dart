@@ -182,7 +182,8 @@ class SplitPaymentFormState extends State<SplitPaymentForm> {
                             onPressed: () async {
                               if (validateForm()) {
                                 for (final split in splits) {
-                                  if (split.account.ownerId == userId) {
+                                  if (split.account.ownerId ==
+                                      FirebaseAuth.instance.currentUser!.uid) {
                                     final accDoc = (await accountsColl
                                             .where('name',
                                                 isEqualTo: split.account.name)

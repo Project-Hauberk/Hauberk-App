@@ -17,19 +17,18 @@ final DocumentReference<Profile> profileDoc = firestore
           snapshot.data() ?? (throw Exception('Null profile map'))),
       toFirestore: (obj, _) => obj.toJson(),
     )
-    .doc(userId);
+    .doc(FirebaseAuth.instance.currentUser!.uid);
 
-final CollectionReference<User> usersColl = firestore
-    .collection('users')
-    .withConverter<User>(
-      fromFirestore: (snapshot, _) =>
-          User.fromJson(snapshot.data() ?? (throw Exception('Null user map'))),
-      toFirestore: (obj, _) => obj.toJson(),
-    );
+final CollectionReference<UserData> usersColl =
+    firestore.collection('users').withConverter<UserData>(
+          fromFirestore: (snapshot, _) => UserData.fromJson(
+              snapshot.data() ?? (throw Exception('Null user map'))),
+          toFirestore: (obj, _) => obj.toJson(),
+        );
 
 final CollectionReference<Account> accountsColl = firestore
     .collection('users')
-    .doc(userId)
+    .doc(FirebaseAuth.instance.currentUser!.uid)
     .collection('accounts')
     .withConverter<Account>(
       fromFirestore: (snapshot, _) => Account.fromJson(
@@ -38,7 +37,7 @@ final CollectionReference<Account> accountsColl = firestore
     );
 final CollectionReference<Account> externalAccountsColl = firestore
     .collection('users')
-    .doc(userId)
+    .doc(FirebaseAuth.instance.currentUser!.uid)
     .collection('external_accounts')
     .withConverter<Account>(
       fromFirestore: (snapshot, _) => Account.fromJson(
@@ -48,7 +47,7 @@ final CollectionReference<Account> externalAccountsColl = firestore
 
 final CollectionReference<Tag> tagsColl = firestore
     .collection('users')
-    .doc(userId)
+    .doc(FirebaseAuth.instance.currentUser!.uid)
     .collection('tags')
     .withConverter<Tag>(
       fromFirestore: (snapshot, _) =>
@@ -58,7 +57,7 @@ final CollectionReference<Tag> tagsColl = firestore
 
 final CollectionReference<Transaction> txnsColl = firestore
     .collection('users')
-    .doc(userId)
+    .doc(FirebaseAuth.instance.currentUser!.uid)
     .collection('transactions')
     .withConverter<Transaction>(
       fromFirestore: (snapshot, _) => Transaction.fromJson(
@@ -68,7 +67,7 @@ final CollectionReference<Transaction> txnsColl = firestore
 
 final CollectionReference<RecurrentCashflow> recurrentCashflowsColl = firestore
     .collection('users')
-    .doc(userId)
+    .doc(FirebaseAuth.instance.currentUser!.uid)
     .collection('recurrent_cashflows')
     .withConverter<RecurrentCashflow>(
       fromFirestore: (snapshot, _) => RecurrentCashflow.fromJson(
@@ -78,7 +77,7 @@ final CollectionReference<RecurrentCashflow> recurrentCashflowsColl = firestore
 
 final CollectionReference<BudgetedEvent> budgetedEventsColl = firestore
     .collection('users')
-    .doc(userId)
+    .doc(FirebaseAuth.instance.currentUser!.uid)
     .collection('budgeted_events')
     .withConverter<BudgetedEvent>(
       fromFirestore: (snapshot, _) => BudgetedEvent.fromJson(
@@ -88,7 +87,7 @@ final CollectionReference<BudgetedEvent> budgetedEventsColl = firestore
 
 final CollectionReference<MonthlyBudget> monthlyBudgetsColl = firestore
     .collection('users')
-    .doc(userId)
+    .doc(FirebaseAuth.instance.currentUser!.uid)
     .collection('budgets')
     .withConverter<MonthlyBudget>(
       fromFirestore: (snapshot, _) => MonthlyBudget.fromJson(
@@ -98,7 +97,7 @@ final CollectionReference<MonthlyBudget> monthlyBudgetsColl = firestore
 
 final CollectionReference<Goal> goalsColl = firestore
     .collection('users')
-    .doc(userId)
+    .doc(FirebaseAuth.instance.currentUser!.uid)
     .collection('goals')
     .withConverter<Goal>(
       fromFirestore: (snapshot, _) =>

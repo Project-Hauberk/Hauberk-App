@@ -35,14 +35,14 @@ const _$TxnTypeEnumMap = {
   TxnType.transfer: 'transfer',
 };
 
-User _$UserFromJson(Map<String, dynamic> json) => User(
+UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
       name: json['name'] as String,
       accountIds: (json['accountIds'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
     );
 
-Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
+Map<String, dynamic> _$UserDataToJson(UserData instance) => <String, dynamic>{
       'name': instance.name,
       'accountIds': instance.accountIds,
     };

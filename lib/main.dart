@@ -10,6 +10,8 @@ import 'package:project_redline/multi_platform/multi_platform.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart' hide EmailAuthProvider;
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 
 // Google Sheets API
 import 'package:googleapis/sheets/v4.dart' as gsheets;
@@ -35,6 +37,7 @@ part './design_system/buttons/navbar_button.dart';
 part './design_system/buttons/chip_button.dart';
 part './design_system/cards/txn_card.dart';
 
+part './views/auth_guard.dart';
 part './views/dashboard.dart';
 part './views/transactions.dart';
 part './views/budgeting.dart';
@@ -49,9 +52,10 @@ part './forms/add_budgeted_event_form.dart';
 part './forms/split_payment_form.dart';
 part './forms/add_goal_form.dart';
 part './forms/link_gsheet_form.dart';
+part './forms/link_revolut_form.dart';
 
 part './objects/transaction.dart';
-part './objects/user.dart';
+part 'objects/user_data.dart';
 part './objects/account.dart';
 part './objects/profile.dart';
 part './objects/tag.dart';
@@ -61,8 +65,6 @@ part './objects/monthly_budget.dart';
 part './objects/goal.dart';
 
 part './utils/utils.dart';
-
-late final String userId = 'testuser';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -83,6 +85,9 @@ void main(List<String> args) async {
   firestore = kDebugMode
       ? (FirebaseFirestore.instance..useFirestoreEmulator('127.0.0.1', 8080))
       : FirebaseFirestore.instance;
+  if (kDebugMode) {
+    await FirebaseAuth.instance.useAuthEmulator('127.0.0.1', 8081);
+  }
   runApp(const HauberkApp());
 }
 
