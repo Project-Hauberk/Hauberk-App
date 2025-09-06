@@ -54,8 +54,10 @@ part './forms/add_goal_form.dart';
 part './forms/link_gsheet_form.dart';
 part './forms/link_revolut_form.dart';
 
+part './api_endpoints/hauberk_api.dart';
+
 part './objects/transaction.dart';
-part 'objects/user_data.dart';
+part './objects/user_data.dart';
 part './objects/account.dart';
 part './objects/profile.dart';
 part './objects/tag.dart';

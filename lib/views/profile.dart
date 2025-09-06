@@ -103,6 +103,21 @@ class ProfileViewState extends State<ProfileView> with AuthGuard {
                     ),
                   ),
                 ),
+                const SizedBox(height: 25),
+                WideButton.icon(
+                  action: () async {
+                    final res =
+                        await HauberkApi.hauberkApiRevolutCreateConsent.post(
+                      queryParameters: (redirectUri: Uri.base.toString()),
+                    );
+                    print(res.statusCode);
+                    print(res.body);
+                  },
+                  height: 70,
+                  label: 'Link Revolut account',
+                  prefixIcon: Icons.payment,
+                ),
+                const SizedBox(height: 25),
               ],
             ),
           ),
