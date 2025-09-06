@@ -110,8 +110,9 @@ class ProfileViewState extends State<ProfileView> with AuthGuard {
                         await HauberkApi.hauberkApiRevolutCreateConsent.post(
                       queryParameters: (redirectUri: Uri.base.toString()),
                     );
-                    print(res.statusCode);
-                    print(res.body);
+                    if (res.statusCode == 200) {
+                      web.window.open(jsonDecode(res.body)['authUrl']);
+                    }
                   },
                   height: 70,
                   label: 'Link Revolut account',

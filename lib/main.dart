@@ -1,6 +1,7 @@
 library hauberk.app;
 
 // Responsive Design
+import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:project_redline/dimensions/dimensions.dart';
@@ -20,6 +21,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:googleapis_auth/auth_browser.dart';
 import 'package:http/http.dart' as http;
 
+import 'package:web/web.dart' as web;
 import 'package:flutter/material.dart';
 import 'package:hauberk/secrets.dart';
 
